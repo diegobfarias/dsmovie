@@ -8,6 +8,7 @@ import { BASE_URL } from "utils/requests";
 function Listing() {
 
     const [pageNumber, setPageNumber] = useState(0);
+
     const [page, setPage] = useState<MoviePage>({
         content: [],
         last: true,
@@ -28,9 +29,13 @@ function Listing() {
             });
     }, [pageNumber]);
 
+    const handlePageChanging = (newPageNumber : number) => {
+        setPageNumber(newPageNumber);
+    }
+
     return (
         <>
-            <Pagination />
+            <Pagination page={page} onChange={handlePageChanging}/>
             <div className="container">
                 <div className="row">
                     {page.content.map(movie => (
